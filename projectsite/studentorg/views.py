@@ -11,6 +11,8 @@ from .models import OrgMember
 from .forms import OrgMemberForm
 from .models import Student
 from .forms import StudentForm
+from .models import Program
+from .forms import ProgramForm
 from django.urls import reverse_lazy
 
 class HomePageView(ListView):
@@ -114,3 +116,27 @@ class StudentDeleteView(DeleteView):
     model = Student
     template_name = 'includes/org_del.html'
     success_url = reverse_lazy('student-list')
+
+#Program Views
+class ProgramList(ListView):
+    model = Program
+    content_object_name = 'program'
+    template_name = 'includes/program_list.html'
+    paginate_by = 10
+
+class ProgramCreateView(CreateView):
+    model = Program
+    form_class = ProgramForm
+    template_name = 'includes/org_form.html'
+    success_url = reverse_lazy('program-list')
+
+class ProgramUpdateView(UpdateView):
+    model = Program
+    form_class = ProgramForm
+    template_name = 'includes/org_form.html'
+    success_url = reverse_lazy('program-list')
+
+class ProgramDeleteView(DeleteView):
+    model = Program
+    template_name = 'includes/org_del.html'
+    success_url = reverse_lazy('program-list')

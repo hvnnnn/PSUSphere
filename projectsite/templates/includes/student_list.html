@@ -1,0 +1,45 @@
+{% extends 'includes/base.html' %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Students</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="card-title">Student Directory</div>
+                        <a href="{% url 'student-add' %}" class="btn btn-primary btn-sm">Add Student</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped mt-3">
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>Full Name</th>
+                                    <th>Program</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for object in object_list %}
+                                <tr>
+                                    <td>{{ object.student_id }}</td>
+                                    <td>{{ object.last_name }}, {{ object.first_name }} {{ object.middle_name|default:"" }}</td>
+                                    <td>{{ object.program }}</td>
+                                    <td>
+                                        <a href="{% url 'student-update' object.id %}" class="btn btn-link btn-primary">Edit</a>
+                                        <a href="{% url 'student-delete' object.id %}" class="btn btn-link btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr><td colspan="4" class="text-center">No students found.</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'includes/base.html' %}
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Programs</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="card-title">List of Programs</div>
+                        <a href="{% url 'program-add' %}" class="btn btn-primary btn-sm">Add Program</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped mt-3">
+                            <thead>
+                                <tr>
+                                    <th>Program Name</th>
+                                    <th>College</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for object in object_list %}
+                                <tr>
+                                    <td>{{ object.name }}</td>
+                                    <td>{{ object.college }}</td>
+                                    <td>
+                                        <a href="{% url 'program-update' object.id %}" class="btn btn-link btn-primary">Edit</a>
+                                        <a href="{% url 'program-delete' object.id %}" class="btn btn-link btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr><td colspan="3" class="text-center">No programs found.</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
