@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from studentorg.models import Organization
 from studentorg.forms import OrganizationForm
 from django.urls import reverse_lazy
@@ -21,6 +21,12 @@ class OrganizationList(ListView):
     paginate_by = 5
 
 class OrganizationCreateView(CreateView):
+    model = Organization
+    form_class = OrganizationForm
+    template_name = 'includes/org_form.html'
+    success_url = reverse_lazy('organization-list')
+
+class OrganizationUpdateView(UpdateView):
     model = Organization
     form_class = OrganizationForm
     template_name = 'includes/org_form.html'
