@@ -10,3 +10,9 @@ class HomePageView(ListView):
     template_name = "includes/home.html"
     paginate_by = 10
     ordering = ['name']
+
+class OrganizationList(ListView):
+    model = Organization
+    context_object_name = 'organization'
+    template_name = 'includes/org_list.html'
+    paginate_by = 5
