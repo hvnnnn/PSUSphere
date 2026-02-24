@@ -1,0 +1,62 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Organization Members</h4>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">List of Members</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <form class="navbar-left navbar-form nav-search mr-md-3">
+                                    <div class="input-group">
+                                        <input type="text" placeholder="Search ..." class="form-control">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a href="{% url 'orgmember-add' %}" class="btn btn-success btn-rounded">Add Member</a>
+                            </div>
+                        </div>
+
+                        <table class="table table-head-bg-primary mt-4">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Organization</th>
+                                    <th>Date Joined</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for object in object_list %}
+                                <tr>
+                                    <td>{{ object.student }}</td>
+                                    <td>{{ object.organization }}</td>
+                                    <td>{{ object.date_joined|date:"M d, Y" }}</td>
+                                    <td>
+                                        <a href="{% url 'orgmember-update' object.id %}">Edit</a>
+                                        <a href="{% url 'orgmember-delete' object.id %}" class="text-danger ml-2">Delete</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center">No Records Found</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

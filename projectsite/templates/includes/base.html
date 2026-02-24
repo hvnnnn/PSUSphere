@@ -104,7 +104,7 @@
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{% static 'img/profile.jpg' %}" alt="user-img" width="36" class="img-circle> <span >Hizrian</span></span> </a>
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{% static 'img/profile.jpg' %}" alt="user-img" width="36" class="img-circle"> <span >Hizrian</span> </a>
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
@@ -128,6 +128,7 @@
 						</ul>
 					</div>
 				</nav>
+			</div>
 			</div>
 			<div class="sidebar">
 				<div class="scrollbar-inner sidebar-wrapper">
@@ -168,7 +169,7 @@
 					</div>
 					<ul class="nav">
 						<li class="nav-item">
-							<a href="index.html">
+							<a href="{% url 'home' %}">
 								<i class="la la-dashboard"></i>
 								<p>Dashboard</p>
 								
@@ -176,24 +177,24 @@
 						</li>
 						<li class="nav-item">
 							<a href="{% url 'organization-list' %}">
-								<i class="la la-table"></i>
+								<i class="la la-organization"></i>
 								<p>Organization</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="forms.html">
-								<i class="la la-keyboard-o"></i>
+							<a href="{% url 'orgmember-list' %}">
+								<i class="la la-users-o"></i>
 								<p>Org. Members</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="tables.html">
+							<a href="#">
 								<i class="la la-th"></i>
 								<p>Student</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="notifications.html">
+							<a href="{% url 'college-list' %}">
 								<i class="la la-bell"></i>
 								<p>College</p>
 							</a>
