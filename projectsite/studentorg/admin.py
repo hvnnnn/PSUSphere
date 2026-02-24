@@ -20,13 +20,20 @@ class OrganizationAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('student_id', 'last_name', 'first_name', 'program')
-    list_filter = ('program', 'program__college')
-    search_fields = ('student_id', 'last_name', 'first_name')
-    ordering = ('last_name', 'first_name')
+    list_display = ("student_id", "last_name", "first_name", "middle_name", "program")
+    list_filter = ("program", "program__college")
+    search_fields = ("last_name", "first_name", "student_id")
+    ordering = ("last_name", "first_name")
 
 @admin.register(OrgMember)
 class OrgMemberAdmin(admin.ModelAdmin):
-    list_display = ('student', 'organization', 'date_joined')
-    list_filter = ('organization', 'date_joined')
-    search_fields = ('student__last_name', 'student__student_id', 'organization__name')
+    list_display = ("student", "get_member_program", "organization", "date_joined")
+    list_filter = ("organization", "date_joined")
+    search_fields = ("student__last_name", "student__first_name", "organization__name")
+    
+    # Performance boost: fetches related data in one SQL JOIN
+    list_select_related = ('student', 'student__program', 'organization')
+
+    @admin.display(description='Program', ordering='student__program')
+    def get_member_program(self, obj):
+        return obj.student.program if obj.student else "No Program"
